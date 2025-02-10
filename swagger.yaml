@@ -74,7 +74,7 @@ components:
           format: int
         account_name:
           type: string
-        balanse:
+        balance:
           type: integer
     NewAccount:
       type: object
