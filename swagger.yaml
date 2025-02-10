@@ -8,43 +8,43 @@ servers:
 paths:
   /accounts:
     get:
-      summary: List all users
-      operationId: listUsers
+      summary: List all accounts
+      operationId: listAccounts
       tags:
-        - Users
+        - Accounts
       responses:
         '200':
-          description: A list of users.
+          description: A list of accounts.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
+                  $ref: '#/components/schemas/Account'
     post:
-      summary: Create a new user
-      operationId: createUser
+      summary: Create a new account
+      operationId: createAccount
       tags:
-        - Users
+        - Accounts
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NewUser'
+              $ref: '#/components/schemas/NewAccount'
       responses:
         '201':
-          description: User created
+          description: Account created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-  /accounts/{userId}:
+                $ref: '#/components/schemas/Account'
+  /accounts/{account_id}:
     get:
-      summary: Get a user by ID
-      operationId: getUserById
+      summary: Get a account by ID
+      operationId: getAccountById
       tags:
-        - Users
+        - Accounts
       parameters:
         - name: account_id
           in: path
@@ -59,14 +59,14 @@ paths:
             default: false
       responses:
         '200':
-          description: A user object.
+          description: A account object.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/Account'
 components:
   schemas:
-    User:
+    Account:
       type: object
       properties:
         account_id:
@@ -76,10 +76,10 @@ components:
           type: string
         balanse:
           type: integer
-    NewUser:
+    NewAccount:
       type: object
       required:
         - account_name
       properties:
-        username:
+        account_name:
           type: string
