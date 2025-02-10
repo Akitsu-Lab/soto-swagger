@@ -1,0 +1,85 @@
+openapi: 3.1.1
+info:
+  title: soto-account
+  description: soto-account の API仕様書
+  version: "1.0"
+servers:
+  - url: https://soto-account.deno.dev/
+paths:
+  /accounts:
+    get:
+      summary: List all users
+      operationId: listUsers
+      tags:
+        - Users
+      responses:
+        '200':
+          description: A list of users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      summary: Create a new user
+      operationId: createUser
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /accounts/{userId}:
+    get:
+      summary: Get a user by ID
+      operationId: getUserById
+      tags:
+        - Users
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: includePosts
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: A user object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        account_id:
+          type: integer
+          format: int
+        account_name:
+          type: string
+        balanse:
+          type: integer
+    NewUser:
+      type: object
+      required:
+        - account_name
+      properties:
+        username:
+          type: string
