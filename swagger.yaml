@@ -5,6 +5,9 @@ info:
   version: "1.0"
 servers:
   - url: https://soto-account.deno.dev/
+    description: Prod
+  - url: http://localhost:8000/
+    description: local
 paths:
   /accounts:
     get:
