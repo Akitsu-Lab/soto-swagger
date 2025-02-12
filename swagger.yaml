@@ -42,24 +42,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Account'
-  /accounts/{account_id}:
+  /accounts/{accountId}:
     get:
       summary: Get a account by ID
       operationId: getAccountById
       tags:
         - Accounts
       parameters:
-        - name: account_id
+        - name: accountId
           in: path
           required: true
           schema:
             type: integer
-        - name: includePosts
-          in: query
-          required: false
-          schema:
-            type: boolean
-            default: false
       responses:
         '200':
           description: A account object.
@@ -72,17 +66,17 @@ components:
     Account:
       type: object
       properties:
-        account_id:
+        accountId:
           type: integer
           format: int
-        account_name:
+        accountName:
           type: string
         balance:
           type: integer
     NewAccount:
       type: object
       required:
-        - account_name
+        - accountName
       properties:
-        account_name:
+        accountName:
           type: string
