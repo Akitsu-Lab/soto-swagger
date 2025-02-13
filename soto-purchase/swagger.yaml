@@ -1,0 +1,63 @@
+openapi: 3.1.1
+info:
+  title: Soto Purchase API
+  description: API specification for the Soto Purchase service
+  version: 1.0.0
+servers:
+  - url: https://soto-purchase.deno.dev/
+    description: Production Server
+  - url: http://localhost:8000/
+    description: Local Development Server
+paths:
+  /purchase:
+    post:
+      summary: Purchase a Kuji
+      operationId: purchaseKuji
+      tags:
+        - Purchase
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseRequest'
+      responses:
+        '201':
+          description: Kuji successfully purchased
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseResponse'
+components:
+  schemas:
+    PurchaseRequest:
+      type: object
+      required:
+        - eventId
+        - accountId
+        - selectedNumber
+      properties:
+        eventId:
+          type: integer
+          format: int64
+        accountId:
+          type: integer
+          format: int64
+        selectedNumber:
+          type: integer
+          format: int64
+    PurchaseResponse:
+      type: object
+      properties:
+        eventId:
+          type: integer
+          format: int64
+        accountId:
+          type: integer
+          format: int64
+        selectedNumber:
+          type: integer
+          format: int64
+        isWinner:
+          type: integer
+          format: int64
