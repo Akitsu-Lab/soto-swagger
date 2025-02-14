@@ -61,6 +61,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Account'
+    delete:
+      summary: Delete a account by ID
+      operationId: deleteAccountById
+      tags:
+        - Accounts
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Delete an account object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAccount'
 components:
   schemas:
     Account:
@@ -79,4 +97,11 @@ components:
         - accountName
       properties:
         accountName:
+          type: string
+    DeleteAccount:
+      type: object
+      required:
+        - accountId
+      properties:
+        accountId:
           type: string
