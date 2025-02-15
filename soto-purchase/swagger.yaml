@@ -23,11 +23,22 @@ paths:
               $ref: '#/components/schemas/PurchaseRequest'
       responses:
         '201':
-          description: Kuji successfully purchased
+          description: purchase done.
+  /events:
+    get:
+      summary: List all events
+      operationId: listEvents
+      tags:
+        - Events
+      responses:
+        '200':
+          description: A list of events.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PurchaseResponse'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
 components:
   schemas:
     PurchaseRequest:
@@ -40,24 +51,34 @@ components:
         eventId:
           type: integer
           format: int64
+          example: 1
         accountId:
           type: integer
           format: int64
+          example: 1
         selectedNumber:
           type: integer
           format: int64
-    PurchaseResponse:
+          example: 1
+    Event:
       type: object
       properties:
         eventId:
           type: integer
-          format: int64
-        accountId:
+          format: int
+          example: 1
+        optionCount:
+          type: int
+          example: 1
+        winningNumber:
           type: integer
-          format: int64
-        selectedNumber:
+          example: 1
+        prizeMoney:
           type: integer
-          format: int64
-        isWinner:
+          example: 5000
+        isSelling:
           type: integer
-          format: int64
+          example: 1
+        endSaleDate:
+          type: integer
+          example: "2025-01-31T14:59:59.000Z"
